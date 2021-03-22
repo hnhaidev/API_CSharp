@@ -14,7 +14,7 @@ namespace API_FB
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var req = WebRequest.Create("https://graph.facebook.com/utc2hcmc/posts?access_token=EAAAAZAw4FxQIBAPUAyXltoLxToviNa7fs6UB8wtp9ZAvFPvA5m0d8kxVTmXWXTXcwV4WRZAADyTLG5x2UZBrFgwKEWkPGZCC08504kFa86lGXZBGQLmbxjsYWa7Xzf1ZAZBxmbGIItbcK7RZBEAsEs4MHOW58kHCZA9RnvhlZCktp0Rq1uoEUkZAhY8V9PPKmVek6OcZD" + "");
+            var req = WebRequest.Create("https://graph.facebook.com/utc2hcmc/posts?access_token=EAAAAZAw4FxQIBAGmKentnEWvEqAtY6ZBzi1oF0BD5zzQeAToFGZBzh26PIGnPUyrZBOb7QrZCXKuCkdwQFMpmUOzjdZBuUsApV6mqMWXdAuBzcg6g83c9GzwVXjoV1l7qdhtEx6DEbfMk8kMZA61ZAxZCm2sQ05fKOsHKOK3nsX0dfwZDZD" + "");
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
 
             Stream stream = res.GetResponseStream();
