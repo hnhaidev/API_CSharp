@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FB API B3</title>
+
+    <style>
+        .content {
+            display: flex;
+        }
+        .fb-page {
+            width: 30%;
+        }
+        #countPost {
+            width: 30%;
+            border: 1px solid #DDDDDD;
+            padding: 10px;
+        }
+        .soLikes {
+            margin: 10px 0 0 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="content">
+        <div class="fb-page" data-href="https://www.facebook.com/hnhai.page/" data-tabs="timeline" data-width="1000" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/hnhai.page/" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/hnhai.page/"></a>
+            </blockquote>
+        </div>
+        <!-- data-href="http://127.0.0.1:5500/" : dia chi trang web cua minh -->
+        <div class="fb-comments" data-href="http://127.0.0.1:5500/" data-width="" data-numposts="3"></div>
+        <div id="countPost"></div>
+    </div>
+    
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=737285013600260&autoLogAppEvents=1" nonce="KqsbvlJp"></script>
+    <!-- axios lay api -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- xu ly su kien -->
+    <script>
+        const access_token = "EAAAAZAw4FxQIBAGtiMerGHlWHrmWMvWLzhTEDgeOtOA3ZBz0UHs0bjBEaT4V0n9ipQZCj3VIr9Pb2AcoERIci5ZCtej3XpQuEEZBFXTUzngrT0MVHjHnfVr713dZB4CaHGeDshoZAeAhLPUPoEyWgbejymfQMVwSVOcBf3MAAk5ZAcMoHbcKcQ1ZA";
+        axios.get('https://graph.facebook.com/hnhai.page/feed?fields=comments.summary(true),likes.summary(true)&access_token='+access_token)
+        .then(response => {
+            var soLikes = "";
+
+            // lay 3 status 
+            const soStatus = 3;
+            for (var i = 0; i < soStatus; i++) {
+                soLikes += "<span class='soLikes'>Số like Status <span style='color: #FF0000'>" + (i + 1) + "</span>: <span>";
+                for (var j = 0; j < response.data.data[i].comments.summary.total_count; j++) {
+                    if (response.data.data[i].comments.data[j].message != null) {
+                        outPut += response.data.data[i].comments.data[j].message + " ";
+                    } else {
+                        outPut += " ";
+                    }
+                }
+                soLikes += response.data.data[i].likes.summary.total_count + "<br>";
+            }
+            document.getElementById('countPost').innerHTML = soLikes;
+        })
+        .catch(error => console.error(error));
+    </script>
+</body>
+</html>
